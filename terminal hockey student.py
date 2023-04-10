@@ -14,6 +14,7 @@ goals = {
     "red_goal": 0
 }
 
+#tells that stats of each player on a scale of 1 to 5 on how well they are at speed, toughness, strength, talent, and creativity
 stats = {
     "winger": {
         "speed": 5,
@@ -45,6 +46,7 @@ stats = {
     }
 }
 
+#the red team players with there icon names and location in the rink
 red_team = {
     "center":{
         "icon": "RC",
@@ -78,6 +80,7 @@ red_team = {
     }
 }
 
+#the blue team players with there icon names and location in the rink
 blue_team = {
     "center":{
         "icon": "BCP",
@@ -111,7 +114,7 @@ blue_team = {
     }
 }
 
-
+#clears to rink??
 def clear():
     # for windows
     if name == 'nt':
@@ -134,6 +137,7 @@ def print_menu():
     help = input("")
     return help
 
+#what is printed when a goal is made
 def print_goal():
     cprint("                                 _____  ____          _        _   _ ", attrs=['blink'])
     cprint("                                / ____|/ __ \   /\   | |      | | | |", attrs=['blink'])
@@ -154,7 +158,7 @@ def print_goal():
     cprint("                                    *                                           ", attrs=['blink'])
 
 
-
+#the help menu (tells you possible things you might have a problem with during the game)
 def help_menu():
     print("\n\nBlue Team has first move")
     print("On start of turn you will be promted to choose a player to activate")
@@ -168,7 +172,7 @@ def help_menu():
     print("-Players can get into same space as other players")
     print("-If a player moves outside the rink, the game will quit with an error\n\n\n")
 
-
+#This is the rink where all the players play
 def print_rink(rink):
     for i in range(20):
         for j in range(9):
@@ -213,7 +217,7 @@ def print_rink(rink):
             print("\n")
     print("___________________________________")
 
-
+#moves a team player depending on the team color and the position of the player
 def move_team(turn, player):
     if(turn == "blue"):
         for blue in blue_team:
@@ -235,7 +239,7 @@ def move_team(turn, player):
                             print_rink(rink)
                             i += 1
                         else:
-                            break;
+                            break
 
     if(turn == "red"):
         for red in red_team:
@@ -257,14 +261,16 @@ def move_team(turn, player):
                             print_rink(rink)
                             i += 1
                         else:
-                            break;
+                            break
 
+#This checks if the move was out of bounds
 def move_check(x, y):
     if((x > 8 or x < 0) and (y > 19 or y < 0)): #out of bounds
         return -1
     else:
-        return 0;
+        return 0
 
+#This is how the player moves
 def move_player(turn, player, direction):
     if(direction.lower() == "n"):
         if(turn == "blue"):
@@ -318,7 +324,7 @@ def move_player(turn, player, direction):
 
 
 
-
+#I need to play the code to figure this out
 def puck_swap(x, y, x2, y2, turn, action):
     if(action == "hit" or action == "poke" or action == "shoot"):
         blue_player = ''
@@ -366,7 +372,7 @@ def puck_swap(x, y, x2, y2, turn, action):
             red_team[receiving_player]["icon"] = red_team[receiving_player]["icon"] + "P"
             return receiving_player #returns the opposing player (for their location)
 
-
+#Allows the player to pick a player to hit the puke, the distance of the puke depends on the players stats and turn??
 def hit(turn, player, player_stat):
     x2 = -1
     y2 = -1
@@ -430,7 +436,7 @@ def hit(turn, player, player_stat):
         return 0
 
 
-
+#???
 def poke(turn, player, player_stat):
     x2 = -1
     y2 = -1
@@ -480,7 +486,7 @@ def poke(turn, player, player_stat):
 
 
 
-
+#???
 def puck_pass(turn, passing_player, player_stat):
     x2 = -1
     y2 = -1
@@ -521,7 +527,7 @@ def puck_pass(turn, passing_player, player_stat):
     return 1
 
 
-
+#???
 def tap(turn, receiving_player, player_stat):
     x2 = '-1'
     y2 = '-1'
@@ -545,7 +551,7 @@ def tap(turn, receiving_player, player_stat):
     return 1
 
 
-
+#resets the players to their original locations on both teams ?
 def players_reset(turn):
     blue_team['center']['x'] = 4
     blue_team['center']['y'] = 10
@@ -585,7 +591,7 @@ def players_reset(turn):
         blue_team["center"]["icon"] += "P"
 
 
-
+#Allows a player on a team to shoot the puke for the goal
 def shoot(turn, player, player_stat):
     if(turn == "blue"):
         x = blue_team[player]['x']
@@ -637,7 +643,7 @@ def shoot(turn, player, player_stat):
 
 
 
-
+#???
 def player_action(turn, player, action, player_stat):
     puck = False
     if(turn == "blue"):
@@ -668,7 +674,7 @@ def player_action(turn, player, action, player_stat):
         print("Not sure how this happened")
 
 
-
+#???
 def turn_start(turn):
     print_rink(rink)
     player = ""
@@ -719,17 +725,18 @@ def turn_start(turn):
 
 
 def main():
+
+    #Loops the main menu until the user starts a game
     while(True):
         help = print_menu()
         if(help.lower() == "h" or help.lower() == "help"):
             help_menu()
         else:
-            break;
+            break
 
     while(True):
         turn_start("blue")
         turn_start("red")
-
 
 
 if __name__ == '__main__':
